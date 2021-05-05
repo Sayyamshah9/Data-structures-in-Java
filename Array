@@ -1,0 +1,101 @@
+/*
+  Name - Sayyam Shah
+  Date - 03/05/2021
+  Day - Monday 
+  
+  Question - Write a Method rotate(a[],n,d) to rotate the size of array n with d elements.
+
+
+ --------------ALGORITHM--------------
+   1. Store first d elements in temporary array
+   2. Shift the rest of the array
+   3. Store/append back d elements from temporary array to array
+
+
+ --------------Complexities--------------
+   Time Complexity = O (n)
+   Auxiliary Space = O (d)
+*/
+
+package rotateArray;
+import java.util.*;
+
+public class Rotate {
+	
+//	Main Method
+	public static void main(String[] args) {
+		
+//		Declaring Object of Scanner Class
+		Scanner sc = new Scanner(System.in);
+		
+//		Initalizing  variables and Array Variable
+		int arr[];
+		int n,d;
+		
+		System.out.println("Enter the Size & Number of Rotations");
+		
+//		Input Size and number of rotation
+		n = sc.nextInt();
+		d = sc.nextInt();
+		arr = new int[n];
+		
+		System.out.println("Enter the Array Elements");
+		
+//		Input Array elements
+		for (int i = 0; i < n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+//		Passing the Array,size & No. of rotations to Method
+		rotateArray(arr,n,d);		
+		}
+	
+//	Creating Method
+//	Declaring it static so that we don't need to create it's object
+	private static void rotateArray(int[] arr, int n, int d) {
+		
+//		Declaring temprory Array
+		int temp[] = new int[d];
+       	
+//		1. copying first d elements of array into temporary array
+	    for (int i = 0; i < d; i++) {
+			temp[i] = arr[i];
+			
+			/* i = 0, temp[0] = arr[0]
+			   i = 1, temp[1] = arr[1]*/
+		}
+
+//	    2. Shifting elements to left by d Positions
+	    for (int i = 0; i < arr.length - d; i++) {
+			arr[i] = arr[d+i];
+			
+		/*	i = 0, arr[0] = arr[2+0]
+			i = 1, arr[1] = arr[2+1] 
+			i = 2, arr[2] = arr[2+2]
+			i = 3, arr[3] = arr[2+3]
+			i = 4, arr[4] = arr[2+4]  */ 	
+		}
+	    
+//	    3. Storing Back first d from temporary array to the back of array
+	    int s = n-d; //7-2 = 2
+	    for (int i = 0; i < temp.length; i++) {
+			arr[s+i] = temp[i];
+			
+			/* i = 0, arr[5+0] = temp[0]
+			   i = 1, arr[5+1] = temp[1]*/
+		}
+	    
+//	    Printing Array Using For each Loop
+	    for(int i: arr) {
+	    	System.out.print(i + " " );
+	    }    
+	}
+}
+
+/* ----------------OUTPUT----------------
+   Enter the Size & Number of Rotations
+   7 2
+   Enter the Array Elements
+   8 9 11 1 6 4 2
+   11 1 6 4 2 8 9 
+ */
